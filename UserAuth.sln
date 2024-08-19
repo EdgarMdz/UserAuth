@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAuth", "UserAuth\UserAuth.csproj", "{1E656819-9AD2-4CEC-94D6-A8C2BB088170}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB", "DB\DB.csproj", "{F84C2DDB-EF9D-4C98-8C32-3B983A182089}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C297E99E-61FE-4FC2-AA96-7EB0F8023EA7}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E656819-9AD2-4CEC-94D6-A8C2BB088170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E656819-9AD2-4CEC-94D6-A8C2BB088170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E656819-9AD2-4CEC-94D6-A8C2BB088170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E656819-9AD2-4CEC-94D6-A8C2BB088170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F84C2DDB-EF9D-4C98-8C32-3B983A182089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F84C2DDB-EF9D-4C98-8C32-3B983A182089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F84C2DDB-EF9D-4C98-8C32-3B983A182089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F84C2DDB-EF9D-4C98-8C32-3B983A182089}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFB048D1-7C72-4DE5-8832-31134ADF04DC}
+	EndGlobalSection
+EndGlobal
