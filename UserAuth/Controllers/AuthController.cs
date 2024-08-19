@@ -127,7 +127,7 @@ namespace UserAuth.Controllers
 		[HttpGet("hi"), Authorize]
 		public ActionResult<string> Hi()
 		{
-			return Ok("hi UwU");
+			return Ok("hello");
 		}
 	}
 }
