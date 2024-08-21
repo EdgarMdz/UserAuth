@@ -8,9 +8,9 @@ using UserAuth.Models;
 
 namespace UserAuth.Services
 {
-    public class UserService(IUserRepository _userRepository, IConfiguration _configuration)
+    public class UserService(IUserRepository _userRepository, IConfiguration _configuration) : IUserService
     {
-        public User CreateUser(UserDTO userDTO, Role role = Role.General)
+        public User CreateUser(UserDTO userDTO, Role role)
         {
             using var hmac = new HMACSHA512();
 
@@ -69,7 +69,7 @@ namespace UserAuth.Services
             return tokenHandler.WriteToken(toke);
         }
 
-        private static bool VerifyPassword(string password, byte[] passwordSalt, byte[] passwordHash)
+        private bool VerifyPassword(string password, byte[] passwordSalt, byte[] passwordHash)
         {
             using var hmac = new HMACSHA512(passwordSalt);
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
