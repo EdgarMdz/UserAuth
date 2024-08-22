@@ -11,6 +11,7 @@ namespace UserAuth.Controllers
     public class AuthController(IUserService _userService, ILogger<AuthController> _logger)
         : ControllerBase
     {
+
         [HttpPost("register")]
         public ActionResult<User> Register(UserDTO user)
         {
