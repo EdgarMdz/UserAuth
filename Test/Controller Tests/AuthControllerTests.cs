@@ -9,58 +9,73 @@ using UserAuth.Services;
 
 namespace Test.Controller_Tests
 {
-    public class AuthControllerTests
-    {
-        private readonly Mock<ILogger<AuthController>> _mockLogger;
-        private readonly Mock<IUserRepository> _mockUserRepository;
-        private readonly Mock<IConfiguration> _mockConfiguration;
-        private readonly Mock<IUserService> _mockUserService;
-        private readonly AuthController _controller;
-        private readonly UserDTO userdto;
-        private readonly User user;
+	public class AuthControllerTests
+	{
+		private readonly Mock<ILogger<AuthController>> _mockLogger;
+		private readonly Mock<IUserRepository> _mockUserRepository;
+		private readonly Mock<IConfiguration> _mockConfiguration;
+		private readonly Mock<IUserService> _mockUserService;
+		private readonly AuthController _controller;
+		private readonly UserDTO userdto;
+		private readonly User user;
 
-        public AuthControllerTests()
-        {
-            _mockLogger = new Mock<ILogger<AuthController>>();
-            _mockUserRepository = new Mock<IUserRepository>();
-            _mockConfiguration = new Mock<IConfiguration>();
-            _mockUserService = new Mock<IUserService>();
-            _controller = new AuthController(_mockUserService.Object, _mockLogger.Object);
-            userdto = new() { Password = "123", UserName = "username" };
-            user = new() { UserName = userdto.UserName };
-        }
+		public AuthControllerTests()
+		{
+			_mockLogger = new Mock<ILogger<AuthController>>();
+			_mockUserRepository = new Mock<IUserRepository>();
+			_mockConfiguration = new Mock<IConfiguration>();
+			_mockUserService = new Mock<IUserService>();
+			_controller = new AuthController(_mockUserService.Object, _mockLogger.Object);
+			userdto = new() { Password = "123", UserName = "username" };
+			user = new() { UserName = userdto.UserName };
+		}
 
-        [Fact]
-        public void Register_ValidUser_ReturnsOkResultWithUser()
-        {
-            // Arrange
+		[Fact]
+		public void Register_ValidUser_ReturnsOkResultWithUser()
+		{
+			// Arrange
 
-            _mockUserService.Setup(s => s.FindUser(It.IsAny<string>())).Returns(null as UserDTO);
+			_mockUserService.Setup(s => s.FindUser(It.IsAny<string>())).Returns(null as UserDTO);
 
-            _mockUserService
-                .Setup(s => s.CreateUser(It.IsAny<UserDTO>(), It.IsAny<Role>()))
-                .Returns(user);
+			_mockUserService
+				.Setup(s => s.CreateUser(It.IsAny<UserDTO>(), It.IsAny<Role>()))
+				.Returns(user);
 
-            //Act
-            var result = _controller.Register(userdto);
+			//Act
+			var result = _controller.Register(userdto);
 
-            //Assert
-            var okResult = Assert.IsType<OkObjectResult>(result.Result);
-            var returnedUser = Assert.IsType<User>(okResult.Value);
-            Assert.Equal(user.UserName, returnedUser.UserName);
-        }
+			//Assert
+			var okResult = Assert.IsType<OkObjectResult>(result.Result);
+			var returnedUser = Assert.IsType<User>(okResult.Value);
+			Assert.Equal(user.UserName, returnedUser.UserName);
+		}
 
-        [Fact]
-        public void Register_IUserServiceIsNull_ReturnsNotFoundResult()
-        {
-            // Arrage
-            var controller = new AuthController(null, _mockLogger.Object);
+		[Fact]
+		public void Register_IUserServiceIsNull_ReturnsNotFoundResult()
+		{
+			// Arrage
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+			var controller = new AuthController(null, _mockLogger.Object);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
-            // Act
-            var result = controller.Register(userdto);
+			// Act
+			var result = controller.Register(userdto);
 
-            // Assert
-            Assert.IsType<NotFoundResult>(result.Result);
-        }
-    }
+			// Assert
+			Assert.IsType<NotFoundResult>(result.Result);
+		}
+
+		[Fact]
+		public void Register_UserNameIsEmpty_ReturnsBadRequest()
+		{
+			// Arrange
+			UserDTO user = new() { UserName = "", Password = "" };
+			// Act
+			var result = _controller.Register(user);
+
+			// Assert
+			Assert.IsType<BadRequestObjectResult>(result.Result);
+
+		}
+	}
 }
