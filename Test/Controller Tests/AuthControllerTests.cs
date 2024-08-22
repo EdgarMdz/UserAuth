@@ -77,5 +77,18 @@ namespace Test.Controller_Tests
 			Assert.IsType<BadRequestObjectResult>(result.Result);
 
 		}
+
+		[Fact]
+		public void Register_UserNameIsWhiteSpace_ReturnsBadRequest()
+		{
+			// Arrage
+			UserDTO user = new() { UserName = "      " };
+
+			// Act
+			var result = _controller.Register(user);
+
+			// Assert
+			Assert.IsType<BadRequestObjectResult>(result.Result);
+		}
 	}
 }
